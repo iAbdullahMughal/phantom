@@ -22,3 +22,4 @@ from phantom import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+# Update URLs
