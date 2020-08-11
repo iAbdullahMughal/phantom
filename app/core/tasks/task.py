@@ -12,11 +12,12 @@ def fine_social_user(user_name):
 
     try:
         content = SocialUserSearch.objects.get(username=user_name)
+        print(content.username, content.search_status)
         SharedContent.USER_REF = content
         try:
             search_username(user_name)
         except:
-            pass
+            print("Failed to perform some operations")
         SocialUserSearch.objects.filter(id=content.id).update(finished_at=now(), search_status=True)
 
     except Exception as e:
