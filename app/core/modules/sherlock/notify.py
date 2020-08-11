@@ -5,6 +5,8 @@ results of queries.
 """
 
 from app.core.modules.sherlock.result import QueryStatus
+from app.core.tasks.task import SharedContent
+from app.models import SocialUserFound
 
 
 class QueryNotify():
@@ -140,14 +142,17 @@ class QueryNotifyPrint(QueryNotify):
 
     def update(self, result):
         self.result = result
-        result_found = None
         print(result)
         if result.status == QueryStatus.CLAIMED:
-            result_found = {
-                "site_name": self.result.site_name,
-                "site_url_user": self.result.site_url_user
-            }
-        return result_found
+            print(SharedContent.USER_REF,
+                  self.result.site_name,
+                  self.result.site_url_user)
+            SocialUserFound.objects.create(
+                username=SharedContent.USER_REF,
+                website_name=self.result.site_name,
+                website_url=self.result.site_url_user
+            )
+        return
 
     def __str__(self):
         """Convert Object To String.

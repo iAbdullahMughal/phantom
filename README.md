@@ -11,4 +11,5 @@
 https://phantom-ig.herokuapp.com/
 
 ##### What's added / configured / crawled / captured
-1. Find username across social networks (Sherlock)
+1. Find username from social media platform. Search is based on username.
+ 

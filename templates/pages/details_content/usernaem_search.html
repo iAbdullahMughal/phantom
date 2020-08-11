@@ -1,0 +1,42 @@
+{% if content.details.usernames %}
+    <div class="row row-cards row-deck">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fa fa-user-secret"></i>
+                        Social Username
+                    </h3>
+                </div>
+                <div class="card-body o-auto" style="height: 25rem">
+                    <ul class="list-unstyled list-separated">
+
+                        {% for usernams in content.details.usernames %}
+                            <li class="list-separated-item">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                <span class="avatar avatar-md d-block"
+                                      style="background-image: url(demo/faces/female/12.jpg)"></span>
+                                    </div>
+                                    <div class="col">
+                                        <div>
+                                            <a href="javascript:void(0)"
+                                               class="text-inherit">{{ usernams.website_name }}</a>
+                                        </div>
+                                        <small class="d-block item-except text-sm text-muted h-1x"> {{ usernams.website_url }}</small>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="item-action dropdown">
+                                            <a href="{{ usernams.website_url }}"  target="_blank" class="icon"><i
+                                                    class="fe fe-external-link"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

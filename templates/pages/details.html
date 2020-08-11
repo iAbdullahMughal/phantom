@@ -1,0 +1,68 @@
+{% extends "styles/layout.html" %}
+{% load static %}
+{% load i18n %}
+{% block pagetitle %} PHANTOM -IG {% endblock %}
+
+{% block csslinks %}
+    <link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css' %}">
+
+    <link type="text/css" href="{% static "vendor/datatables/css/dataTables.bootstrap4.css" %}" rel="stylesheet">
+{% endblock %}
+{% block jslinks %}
+    <script src="{% static "/vendor/jquery/jquery.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/jquery/bootstrap.bundle.min.js" %}" type="text/javascript"></script>
+
+    <script src="{% static "vendor/datatables/js/datatables/jquery.dataTables.js" %}" type="text/javascript"></script>
+
+    <script src="{% static 'vendor/moment/moment.min.js' %}"></script>
+    <script src="{% static "vendor/toastr/toastr.min.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/phantom/search.js" %}" type="text/javascript"></script>
+    <script src="{% static "vendor/phantom/recent_user_search.js" %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row row-cards row-deck">
+        <div class="col-12">
+            <div class="text-center">
+                <h3 class="mb-3"> <i class="fe fe-search"></i> User name: <b>{{ content.username }}</b></h3>
+                <p class="mb-4"><i class="fe fe-info"></i> Search Id : {{ content.search_id }}</p>
+
+            </div>
+        </div>
+    </div>
+    {% if content.has_found %}
+        <div class="row row-cards row-deck">
+            <div class="col-12">
+                <div class="text-center">
+                    <div class="alert alert-primary">
+                        <img src="{% static '/images/icons/icon.png' %}"
+                             style="  margin-top: 20px;width: 128px; height: 128px" alt="">
+                        <p>{{ content.error_message }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% elif content.is_running %}
+        <div class="row row-cards row-deck">
+            <div class="col-12">
+
+                <div class="text-center" style="background: #ffffff">
+
+                    <img src="{% static '/images/tenor.gif' %}"
+                         style="  margin-top: 20px;width: 220px; height: 220px" alt="">
+                    <div class="alert alert-primary">
+                        <p>Search started, please view again it will take sometime to complete.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% else %}
+        {% include 'pages/details_content/usernaem_search.html' %}
+
+    {% endif %}
+
+
+{% endblock %}
