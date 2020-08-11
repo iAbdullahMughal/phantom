@@ -18238,19 +18238,6 @@ a.tag-addon:hover {
     vertical-align: bottom;
     font-style: normal;
 }
-
-.flag {
-    width: 1.6rem;
-    height: 1.2rem;
-    display: inline-block;
-    background: no-repeat center/100% 100%;
-    vertical-align: bottom;
-    font-style: normal;
-    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
-}
-
-
 svg {
     -ms-touch-action: none;
     touch-action: none;
@@ -18768,12 +18755,14 @@ svg {
     margin: -3px .75rem -3px -5px;
 }
 
+
 @font-face {
     font-family: "feather";
-    src: url("../../feather/feather-webfont.eot?t=1501841394106");
-    /* IE9*/
-    src: url("../../feather/feather-webfont.eot?t=1501841394106#iefix") format("embedded-opentype"), url("../../feather/feather-webfont.woff?t=1501841394106") format("woff"), url("../../feather/feather-webfont.ttf?t=1501841394106") format("truetype"), url("../../feather/feather-webfont.svg?t=1501841394106#feather") format("svg");
-    /* iOS 4.1- */
+    src: url("../../feather/fonts/feather-webfont.eot?t=1501841394106"); /* IE9*/
+    src: url("../../feather/fonts/feather-webfont.eot?t=1501841394106#iefix") format("embedded-opentype"),
+    url("../../feather/fonts/feather-webfont.woff?t=1501841394106") format("woff"),
+    url("../../feather/fonts/feather-webfont.ttf?t=1501841394106") format("truetype"),
+    url("../../feather/fonts/feather-webfont.svg?t=1501841394106#feather") format("svg"); /* iOS 4.1- */
 }
 
 .fe {
@@ -19839,3 +19828,58 @@ svg {
 .fe-zoom-out:before {
     content: "\ea06";
 }
+/* The spinner */
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+.spinner,
+.spinner:before {
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.spinner:before {
+  content: '';
+  display: block;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  animation: spinner .6s linear infinite;
+}
+
+.spinner-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -10px;
+  margin-left: -10px;
+}
+
+/* Animations */
+
+.spinner-add,
+.spinner-remove {
+  animation-fill-mode: both;
+  animation-duration: .4s;
+}
+
+.spinner-add {
+  animation-name: spinner-add;
+}
+
+@keyframes spinner-add {
+  from {transform: scale(0);}
+  to {transform: scale(1);}
+}
+
+.spinner-remove {
+  animation-name: spinner-remove;
+}
+
+@keyframes spinner-remove {
+  to {transform: scale(0);}
+}
+

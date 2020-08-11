@@ -14,8 +14,8 @@
     <meta name="HandheldFriendly" content="True"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="robots" content="noindex,nofollow,noarchive"/>
-    <link rel="icon" href="{% static "images/icons/favico.ico" %}" type="image/x-icon"/>
-    <link rel="shortcut icon" href="{% static "images/icons/favico.ico" %}" type="image/x-icon"/>
+    <link rel="icon" href="{% static "images/icons/favicon.ico" %}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static "images/icons/favicon.ico" %}" type="image/x-icon"/>
 
     <title>{% block pagetitle %} {% endblock %} </title>
 
@@ -32,33 +32,7 @@
     {% block jslinks %}
     {% endblock %}
 
-    <style>
-        /* Start by setting display:none to make this hidden.
-           Then we position it in relation to the viewport window
-           with position:fixed. Width, height, top and left speak
-           for themselves. Background we set to 80% white with
-           our animation centered, and no-repeating */
-        .loadingModal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(255, 255, 255, .8) url('{% static 'images/FhHRx.gif' %}') 50% 50% no-repeat;
-        }
 
-        /* When the body has the loading class, we turn
-           the scrollbar off with overflow:hidden */
-        body.loading .loadingModal {
-            overflow: hidden;
-        }
-
-        body.loading .loadingModal {
-            display: block;
-        }
-    </style>
 
 
     {% block scriptcode %}
@@ -66,29 +40,46 @@
     {% endblock %}
 </head>
 <body class>
-<div class="flex-fill">
-    <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg order-lg-first">
-                    <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                        <li class="nav-item">
-                            <a href="{% url 'home' %}" class="nav-link"><i class="fa fa-home"></i> Home</a>
-                        </li>
 
-                    </ul>
+<div class="page">
+    <div class="flex-fill">
+
+        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 ml-auto">
+                        <form class="input-icon my-3 my-lg-0">
+                            <a class="btn btn-github" href="https://github.com/iAbdullahMughal/phantom"
+                               title="Source code"><i class="fe fe-github"></i> </a>
+                        </form>
+                    </div>
+                    <div class="col-lg order-lg-first" >
+
+                        <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                            <li class="nav-item">
+                                <a href="{% url 'home' %}" class="nav-link active"><i class="fe fe-home"></i> Home</a>
+
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="my-3 my-md-5">
-        <div class="container">
-            {% block content %}
+        <div class="my-3 my-md-5">
+            <div class="container">
+                {% block content %}
 
-            {% endblock %}
+                {% endblock %}
+            </div>
         </div>
 
     </div>
+    {% include 'styles/footer.html' %}
+
 </div>
+{% block bodyblock %}
+
+{% endblock %}
+<div class="loadingModal"><!-- Place at bottom of page --></div>
 </body>
 </html>
