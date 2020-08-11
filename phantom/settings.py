@@ -10,9 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-import djcelery
 
-djcelery.setup_loader()
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = '7sg82z57m848$-16yw!8q!af%fk*#c032#m52#&w1c$!4v^1b^'
@@ -30,7 +28,6 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
-    'djcelery',
 ]
 
 MIDDLEWARE = [
