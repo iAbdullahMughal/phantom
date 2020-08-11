@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 import dj_database_url
+import django_heroku
 import dotenv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -73,12 +74,9 @@ WSGI_APPLICATION = 'phantom.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
+DATABASES = {'default':{}}
+DATABASES['default'].update(dj_database_url.config(conn_max_age=500, require_ssl=True))
 
-# options = DATABASES['default'].get('OPTIONS', {})
-
-# Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -128,3 +126,4 @@ CELERY_RESULT_BACKEND = os.environ.get('REDISCLOUD_URL', 'redis://' + REDIS_HOST
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
+django_heroku.settings(locals())

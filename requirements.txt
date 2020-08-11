@@ -16,3 +16,4 @@ redis
 django-datatables-view
 dj-database-url==0.2.1
 python-dotenv
+django-heroku
