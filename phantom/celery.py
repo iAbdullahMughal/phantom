@@ -6,8 +6,7 @@ from app.core.tasks.task import fine_social_user
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'phantom.settings')
 app = Celery('phantom')
-app.conf.update(BROKER_URL=os.environ['REDIS_URL'],
-                CELERY_RESULT_BACKEND=os.environ['REDIS_URL'])
+
 app.config_from_object('django.conf.settings', namespace='CELERY')
 app.autodiscover_tasks()
 

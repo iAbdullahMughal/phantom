@@ -14,3 +14,4 @@ torrequest>=0.1.0
 celery
 redis
 django-datatables-view
+django-celery
