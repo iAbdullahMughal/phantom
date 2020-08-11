@@ -14,6 +14,6 @@ torrequest>=0.1.0
 celery==4.2.0
 redis
 django-datatables-view
-dj-database-url==0.2.1
+dj-database-url
 python-dotenv
 django-heroku
