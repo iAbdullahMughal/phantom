@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="card card-body p-3 text-center">
+
+    <div class="text-center">
+        <img src="{% static '/images/icons/icon.png' %}" style="width: 128px; height: 128px" alt="">
+    </div>
+
+    <div style="  display: table;margin: 0 auto;">
+        <div class="m-0">
+            <form id="request">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="input-group">
+                                    <span class="input-group-prepend" id="basic-addon1">
+                                        <span class="input-group-text">Username </span>
+                                    </span>
+                        <input type="text" class="form-control" placeholder="Enter username for search"
+                               aria-label="user_name" id="user_name" name="user_name"
+                               aria-describedby="basic-addon1">
+                        <span class="input-group-append">
+                                        <button class="btn btn-dark" type="submit"><i
+                                                class="fa fa-search"></i> </button>
+                                    </span>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+

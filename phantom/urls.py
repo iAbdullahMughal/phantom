@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 
+from app.views.home_page import home_page
 from phantom import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home_page, name='home'),
+
 ]
-# Update URLs
