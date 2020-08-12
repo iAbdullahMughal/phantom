@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import SocialUserSearch, SocialUserFound
+from app.models import SocialUserSearch, SocialUserFound, GoogleSearchModel
 
 
 def check_user_id(user_id):
@@ -27,6 +27,26 @@ def get_user_names(user_id):
         except:
             return False, None
 
+    except:
+        return False, None
+
+
+def google_records(user_id):
+    try:
+        s_object = SocialUserSearch.objects.get(id=user_id)
+        try:
+            details = GoogleSearchModel.objects.filter(username=s_object)
+            links = []
+            for link in details:
+                links.append(
+                    {
+                        'link': link.google_link,
+                        'title': link.site_title
+                    }
+                )
+            return True, links
+        except:
+            return False, None
     except:
         return False, None
 
@@ -59,6 +79,8 @@ def user_details(request):
                 content["details"] = {
                     'usernames': usernames
                 }
+                status_code, google_links = google_records(user_id)
+                content["google_links"] = google_links
             else:
                 content["is_running"] = True
 

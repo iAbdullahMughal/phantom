@@ -11,5 +11,6 @@
 https://phantom-ig.herokuapp.com/
 
 ##### What's added / configured / crawled / captured
-1. Find username from social media platform. Search is based on username.
+1. Add Google search module, search links and matched pattern.  
+2. Find users from social media platform. Search is based on username.
  

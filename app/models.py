@@ -21,3 +21,15 @@ class SocialUserFound(models.Model):
     class Meta:
         unique_together = ('username', 'website_name')
         db_table = 'tbl_social_found_username'
+
+
+class GoogleSearchModel(models.Model):
+    username = models.ForeignKey(SocialUserSearch, to_field='id', on_delete=models.CASCADE)
+    google_link = models.TextField(max_length=2000, null=False)
+    site_title = models.TextField(max_length=2000, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    class Meta:
+        unique_together = ('username', 'google_link')
+        db_table = 'tbl_google_search'

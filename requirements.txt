@@ -17,3 +17,4 @@ django-datatables-view
 dj-database-url
 python-dotenv
 django-heroku
+google
