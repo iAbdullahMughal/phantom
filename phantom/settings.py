@@ -75,7 +75,12 @@ WSGI_APPLICATION = 'phantom.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {'default':{}}
-DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
+
+if 'ON_HEROKU' in os.environ:
+    DATABASES['default'].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
+else:
+    DATABASES['default'].update(dj_database_url.config())
+
 
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -126,4 +131,6 @@ CELERY_RESULT_BACKEND = os.environ.get('REDISCLOUD_URL', 'redis://' + REDIS_HOST
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
-django_heroku.settings(locals())
+
+if 'ON_HEROKU' in os.environ:
+    django_heroku.settings(locals())
