@@ -33,3 +33,14 @@ class GoogleSearchModel(models.Model):
     class Meta:
         unique_together = ('username', 'google_link')
         db_table = 'tbl_google_search'
+
+
+class InstantUsernameModel(models.Model):
+    username = models.ForeignKey(SocialUserSearch, to_field='id', on_delete=models.CASCADE)
+    website_name = models.CharField(max_length=255, null=False)
+    website_url = models.TextField(max_length=2000, null=False)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    class Meta:
+        unique_together = ('username', 'website_name')
+        db_table = 'tbl_instant_username'

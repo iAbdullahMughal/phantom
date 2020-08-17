@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from app.models import SocialUserSearch, SocialUserFound, GoogleSearchModel
+from app.models import SocialUserSearch, SocialUserFound, GoogleSearchModel, InstantUsernameModel
 
 
 def check_user_id(user_id):
@@ -14,7 +14,7 @@ def get_user_names(user_id):
     try:
         s_object = SocialUserSearch.objects.get(id=user_id)
         try:
-            details = SocialUserFound.objects.filter(username=s_object)
+            details = SocialUserFound.objects.filter(username=s_object.id)
             usernames = []
             for detail in details:
                 usernames.append(
@@ -24,10 +24,12 @@ def get_user_names(user_id):
                     }
                 )
             return True, usernames
-        except:
+        except Exception as e:
+            print(e)
             return False, None
 
-    except:
+    except Exception as e:
+        print(e)
         return False, None
 
 
@@ -50,6 +52,22 @@ def google_records(user_id):
     except:
         return False, None
 
+def get_instant_user_records(user_id):
+
+    try:
+        details = InstantUsernameModel.objects.filter(username=user_id)
+        links = []
+        for detail in details:
+            links.append(
+                {
+                    'website_name': detail.website_name,
+                    'website_url': detail.website_url,
+                }
+            )
+        return True, links
+    except Exception as e:
+        print(e)
+        return False, None
 
 def search_completed(user_id):
     s_object = SocialUserSearch.objects.get(id=user_id)
@@ -75,12 +93,16 @@ def user_details(request):
             content["search_id"] = username_info.id
             content["username"] = username_info.username
             if search_completed(user_id):
+                print("Fetching data")
                 status_code, usernames = get_user_names(user_id)
                 content["details"] = {
                     'usernames': usernames
                 }
                 status_code, google_links = google_records(user_id)
                 content["google_links"] = google_links
+
+                status_code, username_links = get_instant_user_records(user_id)
+                content["instantusername"] = username_links
             else:
                 content["is_running"] = True
 
